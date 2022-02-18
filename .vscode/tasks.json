@@ -1,0 +1,35 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "build_software_lpc",
+            "command": "make",
+            "args": [
+                "V=0"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/lpc55-hal"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+            },
+            "detail": "compiler: make"
+        },
+        {
+            "type": "shell",
+            "label": "build lpc55-hal examples",
+            "command": "cargo",
+            "args": ["build", "--examples"],
+            "options": {"cwd": "${workspaceFolder}/lpc55-hal"},
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+
+        }
+    ],
+    "version": "2.0.0"
+}
