@@ -1,0 +1,17 @@
+{
+    "name": "freertos_sandbox",
+    "dockerFile": "Dockerfile",
+    
+    // Add the IDs of extensions you want installed when the container is created in the array below.
+    "extensions": [
+		"eamodio.gitlens",
+		"mhutchie.git-graph",
+		"ms-vscode.cpptools",
+		"marus25.cortex-debug",
+		"matklad.rust-analyzer",
+
+	],
+  "settings": {
+    "cortex-debug.gdbPath" : "gdb-multiarch"
+  }
+}
