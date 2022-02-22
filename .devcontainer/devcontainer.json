@@ -11,6 +11,11 @@
 		"matklad.rust-analyzer",
 
 	],
+
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/devuser/.ssh,type=bind,consistency=cached"
+  ]  
+
   "settings": {
     "cortex-debug.gdbPath" : "gdb-multiarch"
   }
