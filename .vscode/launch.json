@@ -11,7 +11,8 @@
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "external",
-            "gdbTarget": "host.docker.internal:2331",
+            // "gdbTarget": "172.17.0.1:2331", // Linux
+            "gdbTarget": "host.docker.internal:2331", // Windows
             // "serverpath": "C:/Program Files (x86)/SEGGER/JLink/JLinkGDBServerCL.exe",
             // "armToolchainPath": "/opt/gcc-arm-none-eabi-10.3-2021.10/bin/",
             "device": "LPC55S28JBD100",
