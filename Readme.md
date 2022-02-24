@@ -1,5 +1,12 @@
 *** Preconditions ***
 
+Checkout the archive:
+```
+git clone git@github.com:tnl-rwa/lpc55-rust-sandbox.git
+cd lpc55-rust-sandbox
+git submodule update --init --recursive
+```
+
 Windows with WSL2
 Tested with Ubuntu20.04 WSL2 system, but should work with any ditribution
 Should also work with a native Linux system, any OS
@@ -8,7 +15,7 @@ Download the Segger J-Link GDB server from:
 https://www.segger.com/downloads/jlink/
 
 Start the JLink GDB Server
-
+C:\SEGGER\JLink\JLinkGDBServer.exe -strict -device LPC55S69 -if SWD -vd
 
 Install VsCode
 Install plugins:
