@@ -19,7 +19,7 @@
             "interface": "swd",
             "serialNumber": "", // add J-Link serial number if having multiple attached the same time.
             "runToEntryPoint": "main",
-            "svdFile": "${workspaceRoot}/lpc55s28.svd",
+            "svdFile": "${workspaceRoot}/lpc55s69.svd",
             "preLaunchCommands": [
                 "monitor reset",
                 "del breakpoints",
