@@ -15,8 +15,9 @@ Download the Segger J-Link GDB server from:
 https://www.segger.com/downloads/jlink/
 
 Start the JLink GDB Server (Windows example)
+```
 C:\SEGGER\JLink\JLinkGDBServer.exe -strict -device LPC55S69 -if SWD -vd
-
+```
 Install and start VsCode
 
 Install plugins:
