@@ -6,7 +6,8 @@
     "configurations": [
         {
             "cwd": "${workspaceRoot}",
-            "executable": "./lpc55-hal/target/thumbv8m.main-none-eabi/debug/examples/led_utick",
+            // "executable": "./lpc55-hal/target/thumbv8m.main-none-eabi/debug/examples/rtic_led",
+            "executable": "./rtic-app/target/thumbv8m.main-none-eabi/debug/rtic-app",
             "name": "Debug JLINK",
             "request": "launch",
             "type": "cortex-debug",
@@ -27,7 +28,7 @@
                 "monitor semihosting enable",
                 "monitor semihosting IOClient 3" 
             ],
-            "preLaunchTask": "build lpc55-hal examples",
+            "preLaunchTask": "build rtic-app",
             // "rtos": "FreeRTOS",
             // "showDevDebugOutput": true
         }

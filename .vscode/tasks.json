@@ -6,11 +6,18 @@
             "command": "cargo",
             "args": ["build", "--examples"],
             "options": {"cwd": "${workspaceFolder}/lpc55-hal"},
+            "group": "build",
+        },
+        {
+            "type": "shell",
+            "label": "build rtic-app",
+            "command": "cargo",
+            "args": ["build"],
+            "options": {"cwd": "${workspaceFolder}/rtic-app"},
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-
         }
     ],
     "version": "2.0.0"
