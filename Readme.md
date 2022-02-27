@@ -35,7 +35,7 @@ Install plugins:
     Id: ms-vscode-remote.remote-wsl
 
 
-Op the en the folder in Vscode, in WSL.
+Open the folder in Vscode, in WSL.
 A popup will appear at the bottom right that suggests to open the project in a container. Do that.
 
 It takes a while to build the container.
@@ -51,6 +51,7 @@ In launch.json you can change the `executable` line to debug another example, eg
 - Read write flash
 - I/O: SPI, I2C 
 - Connect and control devices:
+    - Onboard NXP MMA8652FCR1 accelerometer 
     - nRF2L01
     - MFRC-522 RC522 RFID RF IC card
     - HC-SR501 Adjust IR Pyroelectric Infrared PIR Motion Sensor Detector
