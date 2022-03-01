@@ -16,3 +16,4 @@ rtt-target = { version = "0.3", features = ["cortex-m"] }
 panic-halt  = "0.2"
 panic-semihosting = { version = "0.5", features = ["jlink-quirks"] }
 systick-monotonic = "*"
+ssd1306 = "0.3"
