@@ -26,9 +26,7 @@ mod app {
     #[monotonic(binds = SysTick, default = true)]
     type MyMono = Systick<10>; // 10 Hz / 100 ms granularity
 
-    type RedLed = hal::Pin<pins::Pio1_6, pin::state::Gpio<pin::gpio::direction::Output>>;
-    type GreenLed = hal::Pin<pins::Pio1_7, pin::state::Gpio<pin::gpio::direction::Output>>;
-    type BlueLed = hal::Pin<pins::Pio1_4, pin::state::Gpio<pin::gpio::direction::Output>>;
+    type LED<T> = hal::Pin<T, pin::state::Gpio<pin::gpio::direction::Output>>;
 
     #[shared]
     struct Shared {}
@@ -36,9 +34,9 @@ mod app {
     #[local]
     struct Local {
         led_idx: i8,
-        red_led: RedLed,
-        green_led: GreenLed,
-        blue_led: BlueLed,
+        red_led: LED<pins::Pio1_6>,
+        green_led: LED<pins::Pio1_7>,
+        blue_led: LED<pins::Pio1_4>,
     }
 
     #[init]
