@@ -12,10 +12,10 @@ mod app {
     use core::fmt::Write;
     use cortex_m_semihosting::dbg;
     use embedded_hal::digital::v2::PinState;
+    use embedded_hal::digital::v2::{OutputPin, StatefulOutputPin};
     use hal::{
         drivers::pins::Level,
         drivers::{pins, I2cMaster, Pins},
-        prelude::*,
         time::{Hertz, Megahertz},
         typestates::pin,
     };
@@ -125,12 +125,14 @@ mod app {
         )
     }
 
-    fn toggle_state(is_high: bool) -> PinState {
-        if is_high {
-            PinState::Low
-        } else {
-            PinState::High
-        }
+    fn toggle_led<V: OutputPin + StatefulOutputPin>(pin: &mut V) {
+        let state = match pin.is_set_high() {
+            Ok(true) => PinState::Low,
+            Ok(false) => PinState::High,
+            _ => return,
+        };
+
+        let _ = pin.set_state(state);
     }
 
     #[task(local = [led_idx, red_led, green_led, blue_led])]
@@ -139,23 +141,9 @@ mod app {
 
         dbg!("switch_led",);
         match (*led_idx / 2) as i8 {
-            // I would like to call toggle_led(cx.local.red_led) and 
-            // toggle_led(cx.local.green_led) etc. How implement that function? 
-            0 => cx
-                .local
-                .red_led
-                .set_state(toggle_state(cx.local.red_led.is_set_high().unwrap()))
-                .unwrap(),
-            1 => cx
-                .local
-                .green_led
-                .set_state(toggle_state(cx.local.green_led.is_set_high().unwrap()))
-                .unwrap(),
-            2 => cx
-                .local
-                .blue_led
-                .set_state(toggle_state(cx.local.blue_led.is_set_high().unwrap()))
-                .unwrap(),
+            0 => toggle_led(cx.local.red_led),
+            1 => toggle_led(cx.local.green_led),
+            2 => toggle_led(cx.local.blue_led),
             _ => {
                 dbg!("FAAL!");
             }
