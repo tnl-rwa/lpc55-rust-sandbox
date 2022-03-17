@@ -1,5 +1,5 @@
 {
-    "name": "freertos_sandbox",
+    "name": "lpc55_sandbox",
     "dockerFile": "Dockerfile",
     
     // Add the IDs of extensions you want installed when the container is created in the array below.
@@ -14,7 +14,7 @@
 
   "mounts": [
     "source=${localEnv:HOME}/.ssh,target=/home/devuser/.ssh,type=bind,consistency=cached"
-  ]  
+  ],  
 
   "settings": {
     "cortex-debug.gdbPath" : "gdb-multiarch"
