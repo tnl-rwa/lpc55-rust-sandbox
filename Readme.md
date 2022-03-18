@@ -20,19 +20,9 @@ C:\SEGGER\JLink\JLinkGDBServer.exe -strict -device LPC55S69 -if SWD -vd
 ```
 Install and start VsCode
 
-Install plugins:
-    Name: Remote Development
+Install plugin:
+    Name: Remote Development extension pack
     Id: ms-vscode-remote.vscode-remote-extensionpack
-
-    Name: Remote - Containers
-    Id: ms-vscode-remote.remote-containers
-
-    Name: Remote - SSH
-    Id: ms-vscode-remote.remote-ssh
-
-    Windows only:
-    Name: Remote - WSL
-    Id: ms-vscode-remote.remote-wsl
 
 
 Open the folder in Vscode, in WSL.
@@ -41,8 +31,6 @@ A popup will appear at the bottom right that suggests to open the project in a c
 It takes a while to build the container.
 
 After successful load, press F5 to build and debug the project on the target.
-
-In launch.json you can change the `executable` line to debug another example, eg `task`
 
 
 **Things that could be done**

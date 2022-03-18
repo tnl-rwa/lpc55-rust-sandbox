@@ -527,6 +527,7 @@ dependencies = [
  "panic-semihosting",
  "rtt-target",
  "ssd1306",
+ "switch-hal",
  "systick-monotonic",
 ]
 
@@ -618,6 +619,15 @@ name = "stable_deref_trait"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
+
+[[package]]
+name = "switch-hal"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "90a4adc8cbd1726249b161898e48e0f3f1ce74d34dc784cbbc98fba4ed283fbf"
+dependencies = [
+ "embedded-hal",
+]
 
 [[package]]
 name = "syn"

@@ -11,8 +11,7 @@ mod app {
     // extern crate panic_halt;
     use core::fmt::Write;
     use cortex_m_semihosting::dbg;
-    use embedded_hal::digital::v2::PinState;
-    use embedded_hal::digital::v2::{OutputPin, StatefulOutputPin};
+    use switch_hal::{Switch, ToggleableOutputSwitch, ActiveLow};
     use hal::{
         drivers::pins::Level,
         drivers::{pins, I2cMaster, Pins},
@@ -32,11 +31,11 @@ mod app {
     struct Shared {}
 
     #[local]
-    struct Local {
+    struct Local <T>{
         led_idx: i8,
-        red_led: LED<pins::Pio1_6>,
-        green_led: LED<pins::Pio1_7>,
-        blue_led: LED<pins::Pio1_4>,
+        red_led: Switch<LED<pins::Pio1_6>, ActiveLow>,
+        green_led: Switch<LED<pins::Pio1_7>, ActiveLow>,
+        blue_led: Switch<LED<pins::Pio1_4>, ActiveLow>,
     }
 
     #[init]
@@ -91,18 +90,18 @@ mod app {
             .write_str(unsafe { core::str::from_utf8_unchecked(b"hello") })
             .unwrap();
 
-        let red_led = pins
+        let red_led = Switch::<_, ActiveLow>::new(pins
             .pio1_6
             .into_gpio_pin(&mut iocon, &mut gpio)
-            .into_output(Level::High);
-        let green_led = pins
+            .into_output(Level::High));
+        let green_led = Switch::<_, ActiveLow>::new(pins
             .pio1_7
             .into_gpio_pin(&mut iocon, &mut gpio)
-            .into_output(Level::High);
-        let blue_led = pins
+            .into_output(Level::High));
+        let blue_led = Switch::<_, ActiveLow>::new(pins
             .pio1_4
             .into_gpio_pin(&mut iocon, &mut gpio)
-            .into_output(Level::High);
+            .into_output(Level::High));
 
         let systick = cp.SYST;
 
@@ -123,25 +122,15 @@ mod app {
         )
     }
 
-    fn toggle_led<V: OutputPin + StatefulOutputPin>(pin: &mut V) {
-        let state = match pin.is_set_high() {
-            Ok(true) => PinState::Low,
-            Ok(false) => PinState::High,
-            _ => return,
-        };
-
-        let _ = pin.set_state(state);
-    }
-
     #[task(local = [led_idx, red_led, green_led, blue_led])]
     fn switch_led(cx: switch_led::Context) {
         let led_idx = cx.local.led_idx;
 
         dbg!("switch_led",);
         match (*led_idx / 2) as i8 {
-            0 => toggle_led(cx.local.red_led),
-            1 => toggle_led(cx.local.green_led),
-            2 => toggle_led(cx.local.blue_led),
+            0 => cx.local.red_led.toggle().unwrap(),
+            1 => cx.local.green_led.toggle().unwrap(),
+            2 => cx.local.blue_led.toggle().unwrap(),
             _ => {
                 dbg!("FAAL!");
             }
@@ -149,7 +138,7 @@ mod app {
 
         *led_idx = (*led_idx + 1) % 6;
 
-        switch_led::spawn_after(1.secs()).unwrap();
+        switch_led::spawn_after((500 - (*led_idx as u64)*100).millis()).unwrap();
     }
 
     // #[idle(resources = [led, delay, sleep])]
